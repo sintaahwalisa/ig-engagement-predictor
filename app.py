@@ -22,9 +22,31 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# ==================== FORCE LIGHT MODE ====================
+# This JavaScript will force light mode by setting the theme
+st.markdown("""
+<script>
+    var elements = window.parent.document.querySelectorAll('.stApp');
+    elements[0].classList.remove('dark-mode');
+    elements[0].classList.add('light-mode');
+</script>
+""", unsafe_allow_html=True)
+
 # ==================== CUSTOM CSS ====================
 st.markdown("""
 <style>
+    /* Force light mode background */
+    .stApp {
+        background-color: #ffffff;
+        color: #1f2937;
+    }
+    
+    /* Force light mode for all sections */
+    .main, .block-container, section[data-testid="stSidebar"] {
+        background-color: #ffffff;
+        color: #1f2937;
+    }
+    
     /* Main theme colors */
     :root {
         --primary: #9333ea;
@@ -33,6 +55,14 @@ st.markdown("""
         --success: #10b981;
         --warning: #f59e0b;
         --danger: #ef4444;
+        --background: #ffffff;
+        --text: #1f2937;
+    }
+    
+    /* Override any dark mode styles */
+    body, .stApp, .main, section {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
     }
     
     /* Hide Streamlit branding */
@@ -42,37 +72,43 @@ st.markdown("""
     /* Main container */
     .main {
         padding: 1rem;
+        background-color: #ffffff;
     }
     
     /* Headers */
     h1 {
-        color: var(--primary);
+        color: var(--primary) !important;
         font-weight: 700;
         margin-bottom: 0.5rem;
     }
     
     h2, h3 {
-        color: #1f2937;
+        color: #1f2937 !important;
         font-weight: 600;
+    }
+    
+    /* Text elements */
+    p, span, div, label {
+        color: #1f2937 !important;
     }
     
     /* Metric cards */
     [data-testid="stMetricValue"] {
         font-size: 2rem;
         font-weight: 700;
-        color: var(--primary);
+        color: var(--primary) !important;
     }
     
     [data-testid="stMetricLabel"] {
         font-size: 0.875rem;
         font-weight: 500;
-        color: #6b7280;
+        color: #6b7280 !important;
     }
     
     /* Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+        color: white !important;
         border: none;
         border-radius: 8px;
         padding: 0.75rem 2rem;
@@ -90,6 +126,8 @@ st.markdown("""
     /* Input fields */
     .stNumberInput > div > div > input,
     .stSelectbox > div > div > select {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
         border: 2px solid #e5e7eb;
         border-radius: 8px;
         padding: 0.5rem;
@@ -102,22 +140,56 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
     }
     
+    /* Radio buttons */
+    .stRadio > label {
+        color: #1f2937 !important;
+    }
+    
+    .stRadio > div {
+        background-color: #ffffff !important;
+    }
+    
     /* Success/Warning/Error boxes */
     .stSuccess, .stWarning, .stError, .stInfo {
         border-radius: 8px;
         padding: 1rem;
         margin: 1rem 0;
+        background-color: #ffffff !important;
+    }
+    
+    .stSuccess {
+        background-color: #f0fdf4 !important;
+        color: #166534 !important;
+    }
+    
+    .stWarning {
+        background-color: #fffbeb !important;
+        color: #92400e !important;
+    }
+    
+    .stError {
+        background-color: #fef2f2 !important;
+        color: #991b1b !important;
+    }
+    
+    .stInfo {
+        background-color: #eff6ff !important;
+        color: #1e40af !important;
     }
     
     /* Sidebar */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+        background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%) !important;
         border-right: 1px solid #e5e7eb;
+    }
+    
+    [data-testid="stSidebar"] * {
+        color: #1f2937 !important;
     }
     
     /* Cards */
     .prediction-card {
-        background: white;
+        background: white !important;
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -142,6 +214,34 @@ st.markdown("""
         background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
     
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        background-color: #f9fafb !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        color: #6b7280 !important;
+        background-color: transparent !important;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        color: var(--primary) !important;
+    }
+    
+    /* Tables */
+    table {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+    }
+    
+    thead {
+        background-color: #f9fafb !important;
+    }
+    
+    th, td {
+        color: #1f2937 !important;
+    }
+    
     /* Responsive design */
     @media (max-width: 768px) {
         .main {
@@ -164,9 +264,10 @@ st.markdown("""
     
     /* Expander */
     .streamlit-expanderHeader {
-        background-color: #f9fafb;
+        background-color: #f9fafb !important;
         border-radius: 8px;
         font-weight: 600;
+        color: #1f2937 !important;
     }
     
     /* File uploader */
@@ -175,6 +276,17 @@ st.markdown("""
         border-radius: 8px;
         padding: 2rem;
         text-align: center;
+        background-color: #ffffff !important;
+    }
+    
+    /* Markdown */
+    .stMarkdown {
+        color: #1f2937 !important;
+    }
+    
+    /* Caption */
+    .stCaption {
+        color: #6b7280 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -224,9 +336,9 @@ def get_engagement_color(level):
 def get_engagement_emoji(level):
     """Get emoji based on engagement level"""
     emojis = {
-        'High': 'Go!',
-        'Moderate': 'Hold',
-        'Low': 'Not yet'
+        'High': '🚀 Go!',
+        'Moderate': '⚡ Hold',
+        'Low': '⚠️ Not yet'
     }
     return emojis.get(level)
 
@@ -274,7 +386,7 @@ def calculate_features(data):
 # ==================== HEADER ====================
 st.markdown("""
 <div style='text-align: center; padding: 2rem 0;'>
-    <h1 style='font-size: 2.5rem; margin-bottom: 0.5rem;'>Instagram Engagement Predictor</h1>
+    <h1 style='font-size: 2.5rem; margin-bottom: 0.5rem;'>📊 Instagram Engagement Predictor</h1>
     <p style='font-size: 1.1rem; color: #6b7280;'>Content Performance Prediction</p>
 </div>
 """, unsafe_allow_html=True)
@@ -282,11 +394,11 @@ st.markdown("""
 # ==================== SIDEBAR ====================
 with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png", width=80)
-    st.title("Menu")
+    st.title("📱 Menu")
     
     app_mode = st.radio(
         "Select Mode:",
-        ["Prediction", "About"],
+        ["🎯 Prediction", "ℹ️ About"],
         label_visibility="collapsed"
     )
     
@@ -312,29 +424,29 @@ if model is None:
     st.stop()
 
 # ==================== PREDICTION MODE ====================
-if app_mode == "Prediction":
-    st.header("Predict Post Engagement")
+if app_mode == "🎯 Prediction":
+    st.header("🎯 Predict Post Engagement")
     
     # Create two columns for input
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("Engagement Metrics")
-        likes = st.number_input("Likes", min_value=0, value=500, step=10)
-        comments = st.number_input("Comments", min_value=0, value=25, step=1)
-        shares = st.number_input("Shares", min_value=0, value=10, step=1)
-        saves = st.number_input("Saves", min_value=0, value=15, step=1)
+        st.subheader("📊 Engagement Metrics")
+        likes = st.number_input("👍 Likes", min_value=0, value=500, step=10)
+        comments = st.number_input("💬 Comments", min_value=0, value=25, step=1)
+        shares = st.number_input("🔄 Shares", min_value=0, value=10, step=1)
+        saves = st.number_input("🔖 Saves", min_value=0, value=15, step=1)
     
     with col2:
-        st.subheader("Reach & Content")
-        reach = st.number_input("Reach", min_value=1, value=5000, step=100)
-        caption_length = st.number_input("Caption Length (characters)", min_value=0, value=800, step=10)
-        hashtag_count = st.number_input("Number of Hashtags", min_value=0, value=12, step=1)
+        st.subheader("🎯 Reach & Content")
+        reach = st.number_input("👥 Reach", min_value=1, value=5000, step=100)
+        caption_length = st.number_input("📝 Caption Length (characters)", min_value=0, value=800, step=10)
+        hashtag_count = st.number_input("#️⃣ Number of Hashtags", min_value=0, value=12, step=1)
     
     # Calculate derived metrics for display
     if reach > 0:
         st.markdown("---")
-        st.subheader("Calculated Metrics")
+        st.subheader("📈 Calculated Metrics")
         
         metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
         
@@ -357,7 +469,7 @@ if app_mode == "Prediction":
     st.markdown("---")
     
     # Predict button
-    if st.button("Predict Engagement Level", use_container_width=True):
+    if st.button("🚀 Predict Engagement Level", use_container_width=True):
         with st.spinner("Analyzing post performance..."):
             # Prepare data
             input_data = {
@@ -385,7 +497,7 @@ if app_mode == "Prediction":
             prob_dict = {classes[i]: probabilities[i] for i in range(len(classes))}
             
             # Display results
-            st.success("Prediction Complete!")
+            st.success("✅ Prediction Complete!")
             
             # Main prediction card
             emoji = get_engagement_emoji(prediction)
@@ -394,7 +506,7 @@ if app_mode == "Prediction":
             st.markdown(f"""
             <div class='prediction-card {prediction.lower()}-engagement'>
                 <h2 style='color: {color}; margin-bottom: 1rem;'>
-                    {emoji}: {prediction}
+                    {emoji} Engagement Level: {prediction}
                 </h2>
                 <p style='font-size: 1.1rem; color: #6b7280;'>
                     The model predicts this post will have <strong>{prediction}</strong> engagement
@@ -403,7 +515,7 @@ if app_mode == "Prediction":
             """, unsafe_allow_html=True)
             
             # Confidence breakdown
-            st.subheader("Confidence Breakdown")
+            st.subheader("📊 Confidence Breakdown")
             
             conf_col1, conf_col2, conf_col3 = st.columns(3)
             
@@ -454,13 +566,13 @@ if app_mode == "Prediction":
                 margin=dict(l=20, r=20, t=40, b=20),
                 plot_bgcolor='white',
                 paper_bgcolor='white',
-                font=dict(size=12)
+                font=dict(size=12, color='#1f2937')
             )
             
             st.plotly_chart(fig, use_container_width=True)
             
             # Recommendations
-            st.subheader("Recommendations")
+            st.subheader("💡 Recommendations")
             
             if prediction == "High":
                 st.success("""
@@ -490,9 +602,9 @@ if app_mode == "Prediction":
 
 # ==================== ABOUT MODEL MODE ====================
 else:  # About Model
-    st.header("About")
+    st.header("ℹ️ About the Model")
     
-    tab1, tab2, tab3 = st.tabs(["Performance", "Features", "Documentation"])
+    tab1, tab2, tab3 = st.tabs(["📊 Performance", "🔧 Features", "📚 Documentation"])
     
     with tab1:
         st.subheader("Model Performance Metrics")
@@ -562,7 +674,7 @@ else:  # About Model
         """)
     
     with tab3:
-        st.subheader("Documentation & Best Practices")
+        st.subheader("📚 Documentation & Best Practices")
         
         st.markdown("""
         ### Usage Guidelines
@@ -613,7 +725,7 @@ else:  # About Model
         """)
     
     st.markdown("---")
-    st.info(" **Tip**: For best results, use this tool as part of a comprehensive content strategy, not as the only decision-making factor.")
+    st.info("💡 **Tip**: For best results, use this tool as part of a comprehensive content strategy, not as the only decision-making factor.")
 
 # ==================== FOOTER ====================
 st.markdown("---")
