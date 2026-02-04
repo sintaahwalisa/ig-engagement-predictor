@@ -1,0 +1,12 @@
+[
+  "likes_per_10k_reach",
+  "comments_per_10k_reach",
+  "shares_per_10k_reach",
+  "saves_per_10k_reach",
+  "active_passive_ratio",
+  "log_reach_win",
+  "caption_bucket_medium",
+  "caption_bucket_long",
+  "hashtag_bucket_optimal",
+  "hashtag_bucket_high"
+]

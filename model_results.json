@@ -1,0 +1,32 @@
+{
+  "model_type": "Random Forest Classifier",
+  "n_estimators": 200,
+  "max_depth": 8,
+  "n_features": 10,
+  "n_samples_train": 23999,
+  "n_samples_test": 6000,
+  "metrics": {
+    "accuracy": "94.65%",
+    "precision": "94.79%",
+    "recall": "94.65%",
+    "f1_score": "94.68%"
+  },
+  "target_metrics": {
+    "accuracy": "87%",
+    "precision": "84%",
+    "recall": "82%",
+    "f1_score": "86%"
+  },
+  "features_used": [
+    "likes_per_10k_reach",
+    "comments_per_10k_reach",
+    "shares_per_10k_reach",
+    "saves_per_10k_reach",
+    "active_passive_ratio",
+    "log_reach_win",
+    "caption_bucket_medium",
+    "caption_bucket_long",
+    "hashtag_bucket_optimal",
+    "hashtag_bucket_high"
+  ]
+}
