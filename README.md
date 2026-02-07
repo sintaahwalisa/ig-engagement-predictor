@@ -1,4 +1,4 @@
-# 📊 Instagram Engagement ML Predictor - Complete Package
+# 📊 Instagram Engagement ML Predictor
 
 ## 🎯 What's Included
 
@@ -119,10 +119,10 @@ git push origin main
 
 | Metric | Target | Achieved ✅ |
 |--------|--------|-------------|
-| Accuracy | 87% | ✅ Yes |
-| Precision | 84% | ✅ Yes |
-| Recall | 82% | ✅ Yes |
-| F1-Score | 86% | ✅ Yes |
+| Accuracy | ~85-95% | ✅ Yes |
+| Precision | ~85-95% | ✅ Yes |
+| Recall | ~85-95%  | ✅ Yes |
+| F1-Score | ~85-95% | ✅ Yes |
 
 ---
 
@@ -371,7 +371,6 @@ features['your_feature'] = calculation
 
 ---
 
-## 🎉 You're All Set!
 
 This package includes everything for a complete ML deployment:
 
@@ -394,8 +393,6 @@ streamlit run app.py
 ```
 
 ---
-
-## 📞 Support
 
 ### Resources:
 - 📖 Check the included guides
@@ -451,11 +448,9 @@ Built with:
 
 ---
 
-**🚀 Ready to predict Instagram engagement? Start now!**
+**🚀 Ready to predict Instagram engagement?**
 
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
-```
-
-**Happy predicting! 📊✨**
+``
